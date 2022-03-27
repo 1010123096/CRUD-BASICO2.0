@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link type="text/css" rel="stylesheet" href="estilo.CSS"
+</head>
+<body>
+    <table>
+        <tr>
+            <td>
+                <form autocomplete="off" onsubmit="enviarFormulario()">
+                    <div>
+                        <label for="personaNombre">Nombre</label>
+                        <input type="text" name="personaNombre" id="personaNombre">
+                    </div>
+                    <div>
+                        <label for="personaApellido">Apellido</label>
+                        <input type="text" name="personaApellido" id="personaApellido">
+                    </div>
+                    <div>
+                        <label for="personaPais">Pais</label>
+                        <input type="text" name="personaPais" id="personaPais">
+                    </div>
+                    <div>
+                        <label for="personaOcupacion">Ocupacion</label>
+                        <input type="text" name="personaOcupacion" id="personaOcupacion">
+                    </div>
+
+                    <div class="form_action--button">
+                        <input type="submit" value="Enviar">
+                        <input type="reset" value="Limpiar">
+                    </div>
+                </form>
+
+                <td>
+                    <table class="list" id="listaTabla">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Pais</th>
+                                <th>Ocupacion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                       
+                    </table>
+                </td>
+            </td>
+        </tr>
+    </table>
+    <script type="text/javascript" src="./script.js"></script> 
+</body>
+</html>
