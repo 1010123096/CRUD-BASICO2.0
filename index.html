@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="scriptt.js"></script>
+   
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link type="text/css" rel="stylesheet" href="estilo.CSS"
+    <link type="text/css" rel="stylesheet" href="estilo.CSS">
+
+    <script>window.addEventListener('load', crearBaseDeDatos())</script>  
+    <script>window.addEventListener('load', crearTabla())</script>  
+ 
+    
+    
 </head>
 <body>
+   
     <table>
         <tr>
             <td>
-                <form autocomplete="off" onsubmit="enviarFormulario()">
+                <form action="#" name="frmPersona">
                     <div>
                         <label for="personaNombre">Nombre</label>
                         <input type="text" name="personaNombre" id="personaNombre">
-                    </div>
+                    
                     <div>
                         <label for="personaApellido">Apellido</label>
                         <input type="text" name="personaApellido" id="personaApellido">
@@ -30,8 +39,9 @@
                     </div>
 
                     <div class="form_action--button">
-                        <input type="submit" value="Enviar">
-                        <input type="reset" value="Limpiar">
+                        <input type="submit" id= "Enviar" value="Enviar" onclick="insertarTabla()"/>
+                      <!--  <input type="button" id= "Consultar" value="Consultar" onclick="mostrarTabla()"/>-->
+                        <button  class = "boton" type="button" onclick="mostrarTabla()">Mostrar</button>
                     </div>
                 </form>
 
@@ -54,6 +64,8 @@
             </td>
         </tr>
     </table>
-    <script type="text/javascript" src="./script.js"></script> 
+ <!--<script type="text/javascript" src="./script.js"></script> -->
+ 
 </body>
+<script src="scriptt.js"></script>
 </html>

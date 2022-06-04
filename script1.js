@@ -20,6 +20,7 @@ function leerDatosForrmulario() {
     formData["personaPais"] = document.getElementById("personaPais").value;
     formData["personaOcupacion"] = document.getElementById("personaOcupacion").value;
     return formData;
+    
 }
 
 //Inserta datos 
