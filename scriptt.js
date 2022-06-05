@@ -1,3 +1,5 @@
+var nomTabla;
+var NombreModificar
 
 function crearBaseDeDatos() {
 
@@ -35,9 +37,9 @@ function insertarTabla() {
 }
 function mostrarTabla() {
 	db.transaction(function (tx) {
-console.log('XD');
+		console.log('XD');
 		tx.executeSql('SELECT * FROM Persona', [],
-	
+
 			function callback(tx, results) {
 				var len = results.rows.length, i;
 				var lista = [];
@@ -58,7 +60,11 @@ console.log('XD');
 					celda4 = newRow.insertCell(3);
 					celda4.innerHTML = results.rows.item(i).Ocupacion;
 					celda5 = newRow.insertCell(4);
-					celda5.innerHTML =  '<button onClick="borrarRegistro('+ results.rows.item(i).Nombre +')">Delete</button>';
+					nomTabla = results.rows.item(i).Nombre
+					celda5.innerHTML = '<button onClick="obtenerRegistroEditado(this)">Edit</button> <button onClick="eliminarRegistro()">Delete</button>';
+					//celda5.innerHTML =  '<button  class = "boton" type="button" onclick="eliminarRegistro()"></button><button  class = "boton" type="button" onclick="eliminarRegistro()"></button>';
+
+					//<button onClick="borrarRegistro('+ nombre +');">Delete</button>
 				}
 			},
 			function errorCallback(tx, error) {
@@ -67,16 +73,72 @@ console.log('XD');
 		);
 	});
 }
+function mostarHTML(nombre) {
 
-
-function borrarRegistro(nombre){
-console.log(nombre);
+	NombreModificar = nombre;
+	console.log("modificando");
 	db.transaction(function (tx) {
-		console.log("borrando2");
-		
-		tx.executeSql('DELETE FROM Persona WHERE Nombre="'+ nombre +'"');
+		tx.executeSql('SELECT * FROM Persona WHERE Nombre ="' + nombre + '"', [],
+			function callback(tx, results) {
+				var lista = [];
+				var len = results.rows.length, i;
+				console.log("mostrando");
+
+				for (var i = 0; i < len; i++) {
+					console.log("mostrandox2");
+					document.getElementById('personaNombre').value = results.rows.item(i).Nombre;
+					document.getElementById('personaApellido').value = results.rows.item(i).Apellido;
+					document.getElementById('personaPais').value = results.rows.item(i).Pais;
+					document.getElementById('personaOcupacion').value = results.rows.item(i).Ocupacion;
+
+				}
+
+			},
+			function errorCallback(tx, error) {
+				alert(error.message);
+			}
+		);
+	});
+
+}
+function obtenerRegistroEditado(td) {
+    selectedRow = td.parentElement.parentElement;
+    document.getElementById("personaNombre").value = selectedRow.cells[0].innerHTML;
+    document.getElementById("personaApellido").value = selectedRow.cells[1].innerHTML;
+    document.getElementById("personaPais").value = selectedRow.cells[2].innerHTML;
+    document.getElementById("personaOcupacion").value = selectedRow.cells[3].innerHTML;
+}
+function guardarModificacion(){
+	console.log("modificar")
+	db.transaction(function (tx) {
+		var nombre = document.getElementById('personaNombre').value;
+		console.log(nombre);
+		var apellido = document.getElementById('personaApellido').value;
+		console.log(apellido);
+		var pais = document.getElementById('personaPais').value;
+		console.log(pais);
+		var ocupacion = document.getElementById('personaOcupacion').value;
+		console.log(ocupacion);
+		if ((personaNombre == "") ||  (personaApellido == "") || (personaPais == "") || (personaOcupacion == "") ) {
+			alert("Faltan datos por ingresar");
+		} else {
+			tx.executeSql('UPDATE Persona SET Nombre ="'+nombre+'",Apellido="'+apellido+'",Pais="'+pais+'",Ocupacion="'+ocupacion+'"');
+			console.log("modificandoooo");
+		}
 		mostrarTabla();
 	});
+}
+
+function eliminarRegistro() {
+	console.log(nomTabla);
+	db.transaction(function (tx) {
+		console.log("borrando2");
+
+		tx.executeSql('DELETE FROM Persona WHERE Nombre ="' + nomTabla + '"');
+		mostrarTabla();
+		location.reload();
+	});
+
 }
 
 

@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <script src="scriptt.js"></script>
-   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+  
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,7 @@
 
     <script>window.addEventListener('load', crearBaseDeDatos())</script>  
     <script>window.addEventListener('load', crearTabla())</script>  
- 
+    <script>window.addEventListener('load', mostrarTabla())</script> 
     
     
 </head>
@@ -42,6 +43,8 @@
                         <input type="submit" id= "Enviar" value="Enviar" onclick="insertarTabla()"/>
                       <!--  <input type="button" id= "Consultar" value="Consultar" onclick="mostrarTabla()"/>-->
                         <button  class = "boton" type="button" onclick="mostrarTabla()">Mostrar</button>
+                        <button  class = "boton" type="button" onclick="guardarModificacion()">Modificar</button>
+           
                     </div>
                 </form>
 
