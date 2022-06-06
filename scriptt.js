@@ -1,6 +1,7 @@
 var nomTabla;
 var NombreModificar
 
+
 function crearBaseDeDatos() {
 
 	db = openDatabase('Mydb', '1.0', 'base de datos persona', 2 * 1024 * 1024);
@@ -73,8 +74,8 @@ function mostrarTabla() {
 		);
 	});
 }
-function mostarHTML(nombre) {
-
+function mostarHTML() {
+ NombreModificar =nombre
 	NombreModificar = nombre;
 	console.log("modificando");
 	db.transaction(function (tx) {
@@ -101,15 +102,21 @@ function mostarHTML(nombre) {
 	});
 
 }
+
 function obtenerRegistroEditado(td) {
+	
     selectedRow = td.parentElement.parentElement;
     document.getElementById("personaNombre").value = selectedRow.cells[0].innerHTML;
+	NombreModificar = document.getElementById("personaNombre").value;
     document.getElementById("personaApellido").value = selectedRow.cells[1].innerHTML;
     document.getElementById("personaPais").value = selectedRow.cells[2].innerHTML;
     document.getElementById("personaOcupacion").value = selectedRow.cells[3].innerHTML;
+	
+
 }
 function guardarModificacion(){
-	console.log("modificar")
+	
+	console.log("modificar");
 	db.transaction(function (tx) {
 		var nombre = document.getElementById('personaNombre').value;
 		console.log(nombre);
@@ -122,7 +129,7 @@ function guardarModificacion(){
 		if ((personaNombre == "") ||  (personaApellido == "") || (personaPais == "") || (personaOcupacion == "") ) {
 			alert("Faltan datos por ingresar");
 		} else {
-			tx.executeSql('UPDATE Persona SET Nombre ="'+nombre+'",Apellido="'+apellido+'",Pais="'+pais+'",Ocupacion="'+ocupacion+'"');
+			tx.executeSql('UPDATE Persona SET Nombre="'+nombre+'", Apellido="'+apellido+'",Pais="'+pais+'",Ocupacion="'+ocupacion+'" WHERE Nombre="' + NombreModificar + '"');
 			console.log("modificandoooo");
 		}
 		mostrarTabla();
